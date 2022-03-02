@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include "simdjson.h" // modified simdjson 0.9.7
-#include "generic/stage2/tape_writer.h"
+//#include "generic/stage2/tape_writer.h"
 
 //#include "fast_float.h"
 #include <charconv>
