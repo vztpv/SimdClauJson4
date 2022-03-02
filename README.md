@@ -1,2 +1,2 @@
 # SimdClauJson4
-Using simdjson, more fast? parser (can edit)
+Using simdjson 1.0.2, more fast? parser (can edit)
