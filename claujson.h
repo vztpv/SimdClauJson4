@@ -242,7 +242,12 @@ namespace claujson {
 			this->int_val = other.int_val;
 			this->uint_val = other.uint_val;
 			this->float_val = other.float_val;
-			this->str_val = new std::string(*other.str_val);
+			if (other.str_val) {
+				set_str_val(*other.str_val);
+			}
+			else {
+				this->str_val = nullptr;
+			}
 			this->is_key = other.is_key;
 
 			return *this;
