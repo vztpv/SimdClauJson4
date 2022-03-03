@@ -1,4 +1,4 @@
-# SimdClauJson4
+# SimdClauJson4 - unstable, may have many bugs..
 Using simdjson 1.0.2, more fast? parser (can edit)
 
 # Used Other Repo.
