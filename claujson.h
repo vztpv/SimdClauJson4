@@ -723,18 +723,19 @@ namespace claujson {
 		inline const std::vector<UserType*>& get_data() const { return data; }
 		inline std::vector<UserType*>& get_data() { return data; }
 
-		UserType* find(std::string_view key) {
+		// find_ut..
+		UserType* find_ut(std::string_view key) {
 			for (size_t i = 0; i < data.size(); ++i) {
-				if (data[i]->value.key.is_key && *data[i]->value.key.get_str_val() == key) {
+				if (data[i]->is_user_type() && data[i]->value.key.is_key && *data[i]->value.key.get_str_val() == key) {
 					return data[i];
 				}
 			}
 			return nullptr;
 		}
 
-		const UserType* find(std::string_view key) const {
+		const UserType* find_ut(std::string_view key) const {
 			for (size_t i = 0; i < data.size(); ++i) {
-				if (data[i]->value.key.is_key && *data[i]->value.key.get_str_val() == key) {
+				if (data[i]->is_user_type() && data[i]->value.key.is_key && *data[i]->value.key.get_str_val() == key) {
 					return data[i];
 				}
 			}
@@ -1425,6 +1426,10 @@ namespace claujson {
 							if (Vec[0].is_key) {
 								nestedUT[braceNum]->reserve_data_list(nestedUT[braceNum]->get_data_size() + Vec.size() / 2);
 
+								if (Vec.size() % 2 == 1) {
+									exit(1);
+								}
+
 								for (size_t x = 0; x < Vec.size(); x += 2) {
 									if (!Vec[x].is_key) {
 										exit(1);
@@ -1488,6 +1493,12 @@ namespace claujson {
 						if (!Vec.empty()) {
 							if (type == simdjson::internal::tape_type::END_OBJECT) {
 								nestedUT[braceNum]->reserve_data_list(nestedUT[braceNum]->get_data_size() + Vec.size() / 2);
+
+
+								if (Vec.size() % 2 == 1) {
+									exit(1);
+								}
+
 
 								for (size_t x = 0; x < Vec.size(); x += 2) {
 									if (!Vec[x].is_key) {
@@ -1614,6 +1625,12 @@ namespace claujson {
 						if (!Vec[x].is_key) {
 							exit(1);
 						}
+
+						if (Vec.size() % 2 == 1) {
+							exit(1);
+						}
+
+
 						if (Vec[x + 1].is_key) {
 							exit(1);
 						}

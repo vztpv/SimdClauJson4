@@ -61,48 +61,54 @@ int main(int argc, char* argv[])
 		//claujson::LoadData::save("output.json", ut);
 
 		//test2(&ut);
-
+/*
 		{
 			//claujson::ChkPool(ut.get_data_list(0), poolManager2);
 			
 			//poolManager.Clear();
 
 			//claujson::LoadData::_save(std::cout, &ut);
-
+			
 			for (int i = 0; i < 5; ++i)
 			{
 				int a = clock();
 				double sum = 0;
 				int64_t chk = 0;
 
-				claujson::UserType* A = ut.get_data_list(0)->find("features"sv);
+				claujson::UserType* A = ut.get_data_list(0)->find_ut("features"sv);
 
 				// no l,u,d  any 
 				// true      true
 				// false     true
 
-				for (claujson::UserType* iter : A->get_data()) {
-					claujson::UserType* y = iter->find("geometry"sv); // as_array()[t].as_object()["geometry"];
-					if (y) {
-						claujson::UserType* yyy = y->find("coordinates"sv);
-						if (yyy) {
-							yyy = yyy->get_data_list(0);
-						}
+				for (auto iter = A->get_data().begin(); iter != A->get_data().end(); ++iter)
+				{
+						claujson::UserType* y = (*iter)->find_ut("geometry"sv); // as_array()[t].as_object()["geometry"];
 
-						if (yyy) {
-							auto& temp = yyy->get_data();
-							for (const claujson::UserType* z : temp) {
-								auto& temp2 = z->get_data();
-								chk += temp2.size();
-								for (const claujson::UserType* _z : temp2) {  //size3; ++w2) {
+						//chk = (int)y;
+
+					
+					if(y) {
+					//	chk += y->get_data_size();
+						claujson::UserType* yyy =  y->find_ut("coordinates"sv);
+						
+						//chk += (int)yyy;
+						
+						//if (yyy) {
+							yyy = yyy->get_data_list(0);
+						//}
+
+						//if (yyy) {
+							//chk += yyy->get_data_size();
+							for (claujson::UserType* z : yyy->get_data()) {
+								for (claujson::UserType* _z : z->get_data()) {  //size3; ++w2) {
 									if (_z->get_value().data.type == simdjson::internal::tape_type::DOUBLE) {
 										sum += _z->get_value().data.float_val;
-
-										}
-
+									}
 								}
 							}
-						}
+						//}
+						
 						//	//std::cout << dur.count() << "ns\n";
 
 					}
@@ -112,10 +118,11 @@ int main(int argc, char* argv[])
 
 				std::cout << sum << "\n";
 				std::cout << clock() - a << "ms\n";
+				std::cout << "chk " <<  chk << "\n";
 				////std::cout << "time " << std::chrono::duration_cast<std::chrono::milliseconds>(time).count() << "ms\n";
 			}
 		}
-
+		*/
 		bool ok = nullptr != x.first;
 
 		//ut.remove_all(poolManager);
