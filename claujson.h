@@ -1421,6 +1421,8 @@ namespace claujson {
 					if (type == simdjson::internal::tape_type::START_OBJECT ||
 						type == simdjson::internal::tape_type::START_ARRAY) { // object start, array start
 
+
+
 						if (!Vec.empty()) {
 
 							if (Vec[0].is_key) {
@@ -1487,6 +1489,16 @@ namespace claujson {
 					// Right 2
 					else if (type == simdjson::internal::tape_type::END_OBJECT ||
 						type == simdjson::internal::tape_type::END_ARRAY) {
+
+						if (type == simdjson::internal::tape_type::END_ARRAY && nestedUT[braceNum]->is_object()) {
+							std::cout << "{]";
+							exit(1);
+						}
+						
+						if (type == simdjson::internal::tape_type::END_OBJECT && nestedUT[braceNum]->is_array()) {
+							std::cout << "[}";
+							exit(1);
+						}
 
 						state = 0;
 
