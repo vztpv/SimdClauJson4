@@ -1,7 +1,7 @@
 # SimdClauJson4 - unstable, may have many bugs..
 Using simdjson 1.0.2, more fast? parser (can edit)
 
-# Used Other Repo.
+# Used Repo.
 
 # Using simdjson/simdjson (https://github.com/simdjson/simdjson) Apache-2.0 License
                         Apache License
